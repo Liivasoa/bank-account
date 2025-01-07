@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.lrv.bank_account.service.TransferService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
@@ -23,4 +24,11 @@ public class TransferController {
 
         return transfer.executeTransfer(UUID.randomUUID(), UUID.randomUUID(), amount);
     }
+
+    @PostMapping("/init")
+    public String init(@RequestParam BigDecimal amount) throws InterruptedException {
+        transfer.initTransfer(UUID.randomUUID(), UUID.randomUUID(), amount);
+        return "Virement initié avec succès !";
+    }
+
 }
