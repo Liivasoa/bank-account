@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import dev.lrv.bank_account.service.broker.TransferProducer;
 
-import dev.lrv.bank_account.model.TransferRequest;
+import dev.lrv.bank_account.model.Transfer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,8 +33,8 @@ public class TransferService {
     }
 
     public boolean initTransfer(UUID srcId, UUID dstId, BigDecimal amount) throws InterruptedException {
-        TransferRequest transferRequest = new TransferRequest(srcId, dstId, amount);
-        producer.sendTransfer(transferRequest);
+        Transfer transferRequest = new Transfer(srcId, dstId, amount);
+        producer.sendToValidation(transferRequest);
         return true;
     }
 
