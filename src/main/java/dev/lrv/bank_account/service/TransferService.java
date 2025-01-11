@@ -23,15 +23,6 @@ public class TransferService {
 
     private final TransferProducer producer;
 
-    public boolean executeTransfer(UUID srcId, UUID dstId, BigDecimal amount) throws InterruptedException {
-        if (this.getAccountService().validateAccount(srcId) && this.getAccountService().validateAccount(dstId)) {
-            if (this.getAccountService().withdraw(srcId, amount) && this.getAccountService().deposit(dstId, amount)) {
-                return this.getAccountService().notifyUser(srcId);
-            }
-        }
-        return false;
-    }
-
     public boolean initTransfer(UUID srcId, UUID dstId, BigDecimal amount) throws InterruptedException {
         Transfer transferRequest = new Transfer(srcId, dstId, amount);
         producer.sendToValidation(transferRequest);

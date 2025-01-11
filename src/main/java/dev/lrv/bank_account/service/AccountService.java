@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
+import dev.lrv.bank_account.NotificationHandler;
+import dev.lrv.bank_account.model.Transfer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,6 +15,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class AccountService {
+
+    private final NotificationHandler notificationHandler;
 
     public boolean deposit(UUID accountId, BigDecimal amount) throws InterruptedException {
         TimeUnit.SECONDS.sleep(3);
@@ -32,9 +36,16 @@ public class AccountService {
         return true;
     }
 
-    public boolean notifyUser(UUID accountId) throws InterruptedException {
+    public boolean notifyUser(Transfer transfer) throws InterruptedException {
         TimeUnit.SECONDS.sleep(2);
-        System.out.printf("########### Le compte %s a été notifié sur la réussite de son virement %n", accountId);
+
+        StringBuilder notif = new StringBuilder("Le virement de ");
+        notif.append(transfer.getAmount());
+        notif.append(" € a été réalisé avec succès");
+        notificationHandler.sendNotification(notif.toString());
+
+        System.out.printf("########### Le compte %s a été notifié sur la réussite de son virement %n",
+                transfer.getSrcId());
         return true;
     }
 

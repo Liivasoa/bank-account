@@ -36,7 +36,7 @@ public class TransferConsumer {
 
     @KafkaListener(topics = "transfer-notification", groupId = "test-group")
     public void notifyUser(Transfer transfer) throws InterruptedException {
-        accountService.notifyUser(transfer.getSrcId());
+        accountService.notifyUser(transfer);
     }
 
 }
