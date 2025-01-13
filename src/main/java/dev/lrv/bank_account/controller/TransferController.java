@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.lrv.bank_account.service.TransferService;
+import dev.lrv.bank_account.domain.service.TransferService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController

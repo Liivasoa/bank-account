@@ -1,4 +1,4 @@
-package dev.lrv.bank_account.service;
+package dev.lrv.bank_account.domain.service;
 
 import java.math.BigDecimal;
 import java.util.UUID;
